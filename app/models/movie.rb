@@ -1,5 +1,6 @@
 class Movie < ActiveRecord::Base
- def self.all_ratings
-  self.select(:rating).map(&:rating).uniq
- end
+	def self.ratings
+		Movie.select(:rating).distinct.inject([]){|a,m| a.push m.rating}
+	end
+
 end
